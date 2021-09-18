@@ -14,16 +14,21 @@
               <input type="text" class="form-control" name="desc" id="desc">
             </div>
 
-            <div class="input-group mb-4">
-              <input type="file" class="form-control" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Upload">
-              <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
-            </div>
-
             <button type="submit" class="btn btn-dark">Submit</button>
           </form>
     </div>
+    <div class="container my-5">
+      <h2>Upload a File</h2>
+
+      <form action="/uploader" method="post" enctype="multipart/form-data">
+        <input type="file" name="file1">
+        <button type="submit" class="btn btn-dark">Submit</button>
+      </form>
+      
+    </div>
+
     <div class="container my-3">
-        <h2>Your Todos</h2>
+        <h2>Your Todo's</h2>
         
                 {% if allTodo|length == 0 %}
                    
