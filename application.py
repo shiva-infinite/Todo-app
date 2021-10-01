@@ -72,7 +72,7 @@ def uploader():
             return "Uploaded successfully!"
     else:
         if request.method=='POST':
-            f = request.files['file1']
+            f = request.files['file2']
             f.save(os.path.join(application.config['UPLOAD_FOLDER2'], secure_filename(f.filename)))
             return "Uploaded successfully!"
 
