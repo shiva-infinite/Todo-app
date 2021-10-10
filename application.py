@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from werkzeug.utils import secure_filename
-import os
 
+import os
 
 application= Flask(__name__)
 application.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///todo.db"
@@ -20,6 +20,10 @@ class Todo(db.Model):
 
     def __repr__(self) -> str:
         return f"{self.sno} - {self.title}"
+
+counter = 1
+
+
 
 @application.route('/', methods=['GET', 'POST'])
 def hello_world():
@@ -61,21 +65,29 @@ def delete(sno):
     db.session.commit()
     return redirect("/")
 
+
+
 @application.route("/uploader" , methods=['GET', 'POST'])
 def uploader():
-    count = 0
-    if (count < 3):
+ 
+ global counter
+    
+
+ if (counter < 3):
         if request.method=='POST':
             f = request.files['file1']
             f.save(os.path.join(application.config['UPLOAD_FOLDER1'], secure_filename(f.filename)))
-            count = count + 1
+            counter += 1
+            return str(counter)
             return "Uploaded successfully!"
-    else:
+ else:
         if request.method=='POST':
-            f = request.files['file2']
+            f = request.files['file1']
             f.save(os.path.join(application.config['UPLOAD_FOLDER2'], secure_filename(f.filename)))
             return "Uploaded successfully!"
 
 
+
 if __name__ == "__main__":
     application.run(debug=True, port=8000)
+
